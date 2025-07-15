@@ -94,12 +94,13 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         </button>
       </div>
 
-      {/* Joystick panel */}
+      {/* Joystick Panel (Bottom Left) */}
       {showJoystick && (
         <div
           style={{
             position: 'fixed',
             bottom: '40px',
+            left: '40px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -107,6 +108,9 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
             userSelect: 'none',
             zIndex: 1000,
             padding: '20px',
+            backgroundColor: '#eee',
+            borderRadius: '16px',
+            boxShadow: '0 0 10px rgba(0,0,0,0.2)',
           }}
         >
           <Joystick
