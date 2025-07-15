@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+// App.js
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import './App.css';
+import HomePage from './pages/HomePage';
 import logo from './assets/NarataiLogo.png';
 
-import './App.css';
+// Hardcoded users
+const USERS = [{ username: 'aadmin', password: '12345678' }];
 
-import HomePage from './pages/HomePage'; // Home Page
-
-// Hardcoded user credentials
-const USERS = [
-  { username: 'aadmin', password: '12345678' }
-];
-
-// Login Page Component
+// Login Page
 function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (localStorage.getItem('loggedIn') === 'true') {
+      navigate('/home');
+    }
+  }, [navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const userMatch = USERS.find(
-      (user) => user.username === username && user.password === password
-    );
-
-    if (userMatch) {
+    const match = USERS.find((user) => user.username === username && user.password === password);
+    if (match) {
       localStorage.setItem('loggedIn', 'true');
       navigate('/home');
     } else {
       alert('Invalid username or password');
-      setPassword(''); // Clear password field on fail
+      setPassword('');
     }
   };
 
@@ -37,11 +37,7 @@ function LoginPage() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="Naratai Logo" />
         <h2>Login</h2>
-        <form
-          onSubmit={handleLogin}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          autoComplete="off"
-        >
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <input
             type="text"
             placeholder="Username"
@@ -49,7 +45,6 @@ function LoginPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
             style={{ padding: '10px', margin: '5px', width: '250px' }}
-            aria-label="username"
             autoComplete="username"
           />
           <input
@@ -59,25 +54,22 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             style={{ padding: '10px', margin: '5px', width: '250px' }}
-            aria-label="password"
             autoComplete="current-password"
           />
-          <button type="submit" style={{ padding: '10px 20px', marginTop: '10px' }}>
-            Login
-          </button>
+          <button type="submit" style={{ padding: '10px 20px', marginTop: '10px' }}>Login</button>
         </form>
       </header>
     </div>
   );
 }
 
-// Protected Route Wrapper Component
+// Protected Route
 function ProtectedRoute({ children }) {
   const loggedIn = localStorage.getItem('loggedIn') === 'true';
   return loggedIn ? children : <Navigate to="/" />;
 }
 
-// Main App Component with Routing
+// App Component
 function App() {
   return (
     <Router>
@@ -91,7 +83,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Redirect unknown routes to login */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
