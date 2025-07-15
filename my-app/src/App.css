@@ -1,9 +1,18 @@
+/* src/App.css */
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 120px;
+  height: 20vmin;
+  pointer-events: none;
+  margin-bottom: 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear; /* Optional: adds a spinning animation to the logo */
+  }
 }
 
 .App-header {
@@ -19,6 +28,26 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Optional: Add some basic styling for form inputs and button */
+input[type="text"],
+input[type="password"] {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #4ac1e8;
 }
 
 @keyframes App-logo-spin {
