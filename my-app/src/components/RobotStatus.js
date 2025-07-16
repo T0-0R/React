@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { Joystick } from "react-joystick-component";
+import reportForm from "../assets/Problem Report Form.png";
 
 const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
   const [showJoystick, setShowJoystick] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showReportPopup, setShowReportPopup] = useState(false);
 
   const toggleJoystick = () => setShowJoystick((prev) => !prev);
   const toggleCamera = () => setShowCamera((prev) => !prev);
   const toggleSettings = () => setShowSettings((prev) => !prev);
-  const toggleStatusDropdown = () => setShowStatusDropdown((prev) => !prev);
+  const toggleUserMenu = () => setShowUserMenu((prev) => !prev);
+  const toggleReportPopup = () => setShowReportPopup((prev) => !prev);
 
   return (
     <>
-      {/* Full Width Top Bar */}
       <div
         style={{
           position: "fixed",
@@ -34,44 +37,21 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
           boxSizing: "border-box",
         }}
       >
-        {/* Left side placeholder for logo */}
-        <div
-          style={{
-            width: "120px", // match your logo width
-            height: "100%",
-          }}
-        >
-          {/* This div just reserves space for the logo */}
-        </div>
+        <div style={{ width: "120px", height: "100%" }} />
 
-        {/* Right side: Robot Status and Controls */}
         <div
           className="robot-status-bar"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            gap: "15px",
-            height: "100%",
-          }}
+          style={{ display: "flex", alignItems: "center", gap: "15px", height: "100%" }}
         >
-          {/* Large screen robot status */}
-          <div
-            className="robot-status-large"
-            style={{ display: "flex", gap: "10px", alignItems: "center" }}
-          >
+          <div className="robot-status-large" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <div>🔋 {battery}%</div>
             <div>🆔 {serial}</div>
             <div>⚡ {velocity} m/s</div>
           </div>
 
-          {/* Small screen dropdown */}
-          <div
-            className="robot-status-small"
-            style={{ display: "none", position: "relative" }}
-          >
+          <div className="robot-status-small" style={{ display: "none", position: "relative" }}>
             <button
-              onClick={toggleStatusDropdown}
+              onClick={() => setShowStatusDropdown((prev) => !prev)}
               style={{
                 padding: "6px 10px",
                 backgroundColor: "transparent",
@@ -108,7 +88,6 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
             )}
           </div>
 
-          {/* Control buttons */}
           <button
             onClick={toggleJoystick}
             style={{
@@ -154,23 +133,74 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
             {showSettings ? "❌" : "⚙️"}
           </button>
 
-          <button
-            onClick={onLogout}
-            style={{
-              padding: "6px 12px",
-              backgroundColor: "#d9534f",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Sign Out
-          </button>
+          <div style={{ position: "relative" }}>
+            <button
+              onClick={toggleUserMenu}
+              style={{
+                background: "transparent",
+                border: "none",
+                fontSize: "22px",
+                cursor: "pointer",
+                padding: "6px",
+                letterSpacing: "-15px",
+              }}
+              title="User menu"
+            >
+              <span role="img" aria-label="user">👤</span>
+              <span role="img" aria-label="arrow">🔻</span>
+            </button>
+
+            {showUserMenu && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  right: 0,
+                  backgroundColor: "#fff",
+                  border: "1px solid #ccc",
+                  borderRadius: "6px",
+                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                  zIndex: 2000,
+                  minWidth: "160px",
+                  padding: "8px 0",
+                }}
+              >
+                <button
+                  onClick={onLogout}
+                  style={{
+                    width: "100%",
+                    padding: "10px 20px",
+                    background: "none",
+                    border: "none",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  🚪 Logout
+                </button>
+                <button
+                  onClick={toggleReportPopup}
+                  style={{
+                    width: "100%",
+                    padding: "10px 20px",
+                    background: "none",
+                    border: "none",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  📝 Report Problem
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Responsive CSS */}
       <style>
         {`
           @media (min-width: 768px) {
@@ -184,22 +214,8 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         `}
       </style>
 
-      {/* Joystick Panel */}
       {showJoystick && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "40px",
-            left: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            userSelect: "none",
-            zIndex: 1000,
-            padding: "20px",
-          }}
-        >
+        <div style={{ position: "fixed", bottom: "40px", left: "40px", zIndex: 1000, padding: "20px" }}>
           <Joystick
             size={120}
             stickSize={60}
@@ -212,7 +228,6 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         </div>
       )}
 
-      {/* Camera Panel */}
       {showCamera && (
         <div
           style={{
@@ -236,7 +251,6 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         </div>
       )}
 
-      {/* Settings Panel */}
       {showSettings && (
         <div
           style={{
@@ -261,6 +275,69 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
             <li>Mode select</li>
             <li>Camera resolution</li>
           </ul>
+        </div>
+      )}
+
+      {showReportPopup && (
+        <div
+          onClick={toggleReportPopup}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 3000,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "20px",
+              position: "relative",
+              maxWidth: "90%",
+              maxHeight: "90%",
+              overflow: "auto",
+              textAlign: "center",
+            }}
+          >
+            <button
+              onClick={toggleReportPopup}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "transparent",
+                border: "none",
+                fontSize: "18px",
+                cursor: "pointer",
+              }}
+            >
+              ❌
+            </button>
+            <h3>📋 Problem Report Form</h3>
+            <img
+              src={reportForm}
+              alt="Report Form"
+              style={{ maxWidth: "50%", height: "auto", margin: "10px 0", borderRadius: "6px" }}
+            />
+            <p>
+              <a
+                href="https://narataitech.sg.larksuite.com/share/base/form/shrlg39q4zyiy4VDq3EEOH2hZyg"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#0275d8", fontWeight: "bold" }}
+              >
+                🔗 Complete the report form/กรอกแบบฟอร์มรายงาน
+              </a>
+            </p>
+          </div>
         </div>
       )}
     </>
