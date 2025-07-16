@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Joystick } from 'react-joystick-component';
+import React, { useState } from "react";
+import { Joystick } from "react-joystick-component";
 
 const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
   const [showJoystick, setShowJoystick] = useState(false);
@@ -32,50 +32,50 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
       {/* Top Bar */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          gap: '20px',
-          position: 'fixed',
-          top: '20px',
-          right: '40px',
-          backgroundColor: '#f5f5f5',
-          padding: '10px 20px',
-          borderRadius: '8px',
-          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '14px',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: "20px",
+          position: "fixed",
+          top: "20px",
+          right: "40px",
+          backgroundColor: "#f5f5f5",
+          padding: "10px 20px",
+          borderRadius: "8px",
+          boxShadow: "0 0 8px rgba(0,0,0,0.1)",
+          fontFamily: "Arial, sans-serif",
+          fontSize: "14px",
           zIndex: 1000,
         }}
       >
         <button
           onClick={toggleJoystick}
           style={{
-            padding: '6px 10px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '24px',
-            color: showJoystick ? '#5cb85c' : '#0275d8',
+            padding: "6px 10px",
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "24px",
+            color: showJoystick ? "#5cb85c" : "#0275d8",
           }}
-          title={showJoystick ? 'Hide joystick' : 'Show joystick'}
+          title={showJoystick ? "Hide joystick" : "Show joystick"}
         >
-          {showJoystick ? '❌' : '🎮'}
+          {showJoystick ? "❌" : "🎮"}
         </button>
 
         <button
           onClick={toggleCamera}
           style={{
-            padding: '6px 10px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '24px',
-            color: showCamera ? '#f0ad4e' : '#5bc0de',
+            padding: "6px 10px",
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "24px",
+            color: showCamera ? "#f0ad4e" : "#5bc0de",
           }}
-          title={showCamera ? 'Hide camera' : 'Show camera'}
+          title={showCamera ? "Hide camera" : "Show camera"}
         >
-          {showCamera ? '❌' : '📷'}
+          {showCamera ? "❌" : "📷"}
         </button>
 
         <div>🔋 Battery: {battery}%</div>
@@ -85,27 +85,27 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         <button
           onClick={toggleSettings}
           style={{
-            padding: '6px 10px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '24px',
-            color: showSettings ? '#6f42c1' : '#6610f2',
+            padding: "6px 10px",
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "24px",
+            color: showSettings ? "#6f42c1" : "#6610f2",
           }}
-          title={showSettings ? 'Hide settings' : 'Show settings'}
+          title={showSettings ? "Hide settings" : "Show settings"}
         >
-          {showSettings ? '❌' : '⚙️'}
+          {showSettings ? "❌" : "⚙️"}
         </button>
 
         <button
           onClick={onLogout}
           style={{
-            padding: '6px 12px',
-            backgroundColor: '#d9534f',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
+            padding: "6px 12px",
+            backgroundColor: "#d9534f",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
           }}
         >
           Sign Out
@@ -116,19 +116,19 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
       {showJoystick && (
         <div
           style={{
-            position: 'fixed',
-            bottom: '40px',
-            left: '40px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            userSelect: 'none',
+            position: "fixed",
+            bottom: "40px",
+            left: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            userSelect: "none",
             zIndex: 1000,
-            padding: '20px',
-            backgroundColor: '#eee',
-            borderRadius: '16px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.2)',
+            padding: "20px",
+            backgroundColor: "#eee",
+            borderRadius: "16px",
+            boxShadow: "0 0 10px rgba(0,0,0,0.2)",
           }}
         >
           <Joystick
@@ -147,19 +147,19 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
       {showCamera && (
         <div
           style={{
-            position: 'fixed',
-            bottom: '40px',
-            right: '40px',
-            width: '300px',
-            height: '220px',
-            backgroundColor: '#000',
-            borderRadius: '16px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.2)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: 'white',
-            fontWeight: 'bold',
+            position: "fixed",
+            bottom: "40px",
+            right: "40px",
+            width: "300px",
+            height: "220px",
+            backgroundColor: "#000",
+            borderRadius: "16px",
+            boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            fontWeight: "bold",
             zIndex: 1000,
           }}
         >
@@ -171,18 +171,18 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
       {showSettings && (
         <div
           style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: 'white',
-            border: '2px solid #6610f2',
-            borderRadius: '12px',
-            padding: '30px',
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            border: "2px solid #6610f2",
+            borderRadius: "12px",
+            padding: "30px",
             zIndex: 1001,
-            minWidth: '300px',
-            boxShadow: '0 0 12px rgba(0, 0, 0, 0.25)',
-            fontFamily: 'Arial, sans-serif',
+            minWidth: "300px",
+            boxShadow: "0 0 12px rgba(0, 0, 0, 0.25)",
+            fontFamily: "Arial, sans-serif",
           }}
         >
           <h3 style={{ marginTop: 0 }}>⚙️ Robot Settings</h3>
