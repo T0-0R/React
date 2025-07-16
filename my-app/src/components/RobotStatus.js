@@ -5,6 +5,7 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
   const [showJoystick, setShowJoystick] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [joystickData, setJoystickData] = useState({ x: 0, y: 0 });
+  const [showSettings, setShowSettings] = useState(false); // <-- New state
 
   const toggleJoystick = () => {
     setShowJoystick((prev) => !prev);
@@ -12,6 +13,10 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
 
   const toggleCamera = () => {
     setShowCamera((prev) => !prev);
+  };
+
+  const toggleSettings = () => {
+    setShowSettings((prev) => !prev);
   };
 
   const handleMove = (stickData) => {
@@ -43,7 +48,6 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
           zIndex: 1000,
         }}
       >
-        {/* Joystick Toggle Button */}
         <button
           onClick={toggleJoystick}
           style={{
@@ -59,7 +63,6 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
           {showJoystick ? '❌' : '🎮'}
         </button>
 
-        {/* Camera Toggle Button */}
         <button
           onClick={toggleCamera}
           style={{
@@ -80,6 +83,21 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         <div>⚡ Velocity: {velocity} m/s</div>
 
         <button
+          onClick={toggleSettings}
+          style={{
+            padding: '6px 10px',
+            backgroundColor: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '24px',
+            color: showSettings ? '#6f42c1' : '#6610f2',
+          }}
+          title={showSettings ? 'Hide settings' : 'Show settings'}
+        >
+          {showSettings ? '❌' : '⚙️'}
+        </button>
+
+        <button
           onClick={onLogout}
           style={{
             padding: '6px 12px',
@@ -94,7 +112,7 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         </button>
       </div>
 
-      {/* Joystick Panel (Bottom Left) */}
+      {/* Joystick Panel */}
       {showJoystick && (
         <div
           style={{
@@ -125,7 +143,7 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
         </div>
       )}
 
-      {/* Camera Panel (Bottom Right) */}
+      {/* Camera Panel */}
       {showCamera && (
         <div
           style={{
@@ -146,7 +164,34 @@ const RobotStatus = ({ battery, serial, velocity, onLogout }) => {
           }}
         >
           📷 Camera Panel
-          {/* Replace this with <video> or webcam stream later */}
+        </div>
+      )}
+
+      {/* Settings Panel (Center screen) */}
+      {showSettings && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: 'white',
+            border: '2px solid #6610f2',
+            borderRadius: '12px',
+            padding: '30px',
+            zIndex: 1001,
+            minWidth: '300px',
+            boxShadow: '0 0 12px rgba(0, 0, 0, 0.25)',
+            fontFamily: 'Arial, sans-serif',
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>⚙️ Robot Settings</h3>
+          <p>More controls can go here...</p>
+          <ul>
+            <li>Adjust speed</li>
+            <li>Mode select</li>
+            <li>Camera resolution</li>
+          </ul>
         </div>
       )}
     </>
