@@ -229,7 +229,7 @@ const RobotStatus = ({
           style={{
             position: "fixed",
             bottom: "40px",
-            left: "40px",
+            left: "250px",
             zIndex: 1000,
             padding: "20px",
           }}
